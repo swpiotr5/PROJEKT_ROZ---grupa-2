@@ -8,3 +8,6 @@ from .models import Main
 class MainView(viewsets.ModelViewSet):
     serializer_class = MainSerializer
     queryset = Main.objects.all()
+
+def index(request):
+    return render(request, 'index.html')
