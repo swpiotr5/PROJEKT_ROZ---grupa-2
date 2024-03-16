@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
 
 const useStyles = createUseStyles({
     form: {
@@ -92,7 +93,10 @@ const Form = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    
+        
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         if (!emailRegex.test(email)) {
           setEmailError('Wprowadź poprawny adres email.');
@@ -100,7 +104,7 @@ const Form = () => {
         }
     
         try {
-          const response = await axios.post('http://localhost:5000/api/verify', { email, password });
+          const response = await axios.post('http://localhost:5000/api/verify', { email, password: hashedPassword });
     
           if (response.data.success) {
             navigate('/home');
