@@ -20,8 +20,15 @@ const useStyles = createUseStyles({
     justifyContent: 'center',
     padding: '40px',
     width: '80%',
-    height: '80vh',
-  }
+    height: '100vh',
+  },
+  '@media (max-width: 1080px)': {
+    wrapper: {
+      width: '100%',
+      height: '100vh',
+      padding: '0px',
+    },
+  },
 });
 
 const Login = () => {

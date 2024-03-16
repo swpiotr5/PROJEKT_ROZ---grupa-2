@@ -17,6 +17,18 @@ const useStyles = createUseStyles({
         width: '50%',
         height: '100%'
       },
+    '@media (max-width: 1080px)': {
+        right: {
+          padding: '0px',
+          borderTopRightRadius: '0px',
+          borderBottomRightRadius: '0px',
+        },
+      },
+    '@media (max-width: 768px)': {
+        right: {
+            width: '100%',
+        },
+      },
 });
 
 const RightWrapper = () => {

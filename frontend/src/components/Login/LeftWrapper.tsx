@@ -15,7 +15,19 @@ const useStyles = createUseStyles({
         background: '#B6BBC4',
         width: '50%',
         height: '100%'
-      }
+      },
+    '@media (max-width: 1080px)': {
+        left: {
+          padding: '0px',
+          borderTopLeftRadius: '0px',
+          borderBottomLeftRadius: '0px',
+        },
+      },
+    '@media (max-width: 768px)': {
+        left: {
+          display: 'none',
+        },
+      },
 });
 
 const LeftWrapper = () => {
