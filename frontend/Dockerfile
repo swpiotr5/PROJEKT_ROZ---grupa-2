@@ -1,13 +1,15 @@
-FROM node:14 as build
+FROM node:lts-slim
 
-WORKDIR /app
+# set work directory
+WORKDIR /app/
 
-COPY package.json package-lock.json ./
+# add to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
-RUN mkdir public
-
-COPY . .
-
-RUN npm run build
+# add app
+COPY . ./
