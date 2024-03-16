@@ -3,7 +3,8 @@ import { createUseStyles } from 'react-jss';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
+import { loginUser } from '../../services/UserService';
+
 
 const useStyles = createUseStyles({
     form: {
@@ -79,94 +80,96 @@ const useStyles = createUseStyles({
 });
 
 const Form = () => {
-    const classes = useStyles();
-    const navigate = useNavigate();
+  const classes = useStyles();
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailFormatError, setEmailFormatError] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+  };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        setIsLoading(true);
-        
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
+    setIsLoading(true);
 
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        if (!emailRegex.test(email)) {
-          setEmailError('Wprowadź poprawny adres email.');
-          return;
-        }
-    
-        try {
-          const response = await axios.post('http://localhost:5000/api/verify', { email, password: hashedPassword });
-    
-          if (response.data.success) {
-            navigate('/home');
-          } else {
-            setEmailError('Nieprawidłowy email lub hasło.');
-          }
-        } catch (error) {
-            console.error('Wystąpił błąd podczas weryfikacji danych.', error);
-            setError('Wystąpił błąd podczas weryfikacji danych. Spróbuj ponownie później.');
-        } finally {
-          setIsLoading(false);
-        }
-    };
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!emailRegex.test(email)) {
+      setEmailFormatError('Wprowadź poprawny adres email.');
+      return;
+    }
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        if (!emailRegex.test(e.target.value)) {
-          setEmailError('Wprowadź poprawny adres email.');
-        } else {
-          setEmailError('');
-        }
-    };
+    try {
+      const response = await loginUser(email, password);
 
-    return (
-        <div className={classes.wrapper}>
-            <form onSubmit={handleSubmit} className={classes.form}>
-                {error && <p className={classes.errorBox}>{error}</p>}
-                <div className={classes.inputContainer}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        className={`${classes.input} ${emailError ? classes.inputError : ''}`}
-                    />
-                    {emailError && <p>Wprowadź poprawny adres email.</p>}
-                </div>
-                <div className={classes.inputContainer}>
-                    <label htmlFor="password">Hasło</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        className={classes.input}
-                    />
-                    <a href="/resetPassword" className={classes.forgotPassword}>Zapomniałeś hasła?</a>
-                </div>
-                <button type="submit" className={classes.button}>
-                  {isLoading ? 'Ładowanie...' : 'Zaloguj się'}
-                </button>
-                <a href="http://localhost:8000/auth/google" className={classes.googleLogin}>
-                    <FcGoogle size={25} /> Zaloguj za pomocą Google
-                </a>
-            </form>
-        </div>
-    );
+      if (response.success) {
+          navigate('/home');
+      } else {
+          const errorMessage = response.message || 'Nieprawidłowy email lub hasło.';
+          setLoginError(errorMessage);
+      }
+    } catch (error) {
+      if ((error as Error).message === 'Network Error.') {
+        setLoginError('Brak połączenia. Spróbuj ponownie później.');
+      } else {
+        setLoginError('Wystąpił błąd podczas weryfikacji danych. Spróbuj ponownie później.');
+      }
+      console.error('Wystąpił błąd podczas weryfikacji danych.', error);
+    } finally {
+      setIsLoading(false);
+    }
+};
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value);
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!emailRegex.test(e.target.value)) {
+        setEmailFormatError('Wprowadź poprawny adres email.');
+      } else {
+        setEmailFormatError('');
+      }
+  };
+
+  return (
+      <div className={classes.wrapper}>
+          <form onSubmit={handleSubmit} className={classes.form}>
+              {loginError && <p className={classes.errorBox}>{loginError}</p>}
+              <div className={classes.inputContainer}>
+                  <label htmlFor="email">Email</label>
+                  <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={handleEmailChange}
+                      className={`${classes.input} ${emailFormatError ? classes.inputError : ''}`}
+                  />
+                  {emailFormatError && <p>{emailFormatError}</p>}
+              </div>
+              <div className={classes.inputContainer}>
+                  <label htmlFor="password">Hasło</label>
+                  <input
+                      type="password"
+                      id="password"
+                      value={password}
+                      onChange={handlePasswordChange}
+                      className={classes.input}
+                  />
+                  <a href="/resetPassword" className={classes.forgotPassword}>Zapomniałeś hasła?</a>
+              </div>
+              <button type="submit" className={classes.button}>
+                {isLoading ? 'Ładowanie...' : 'Zaloguj się'}
+              </button>
+              <a href="http://localhost:8000/auth/google" className={classes.googleLogin}>
+                  <FcGoogle size={25} /> Zaloguj za pomocą Google
+              </a>
+          </form>
+      </div>
+  );
 };
 
 export default Form;
