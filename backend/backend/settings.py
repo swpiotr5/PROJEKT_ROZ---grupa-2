@@ -93,7 +93,7 @@ DATABASES = {
         'USER': 'postgres',                      
         'PASSWORD': 'postgres',                  
         'HOST': 'db_dev',                        # Host bazy danych (nazwa kontenera)
-        'PORT': '5432',                          
+        'PORT': '5432', 
     }
 }
 
