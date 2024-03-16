@@ -86,6 +86,7 @@ const Form = () => {
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
@@ -93,6 +94,8 @@ const Form = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setIsLoading(true);
         
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
@@ -114,6 +117,8 @@ const Form = () => {
         } catch (error) {
             console.error('Wystąpił błąd podczas weryfikacji danych.', error);
             setError('Wystąpił błąd podczas weryfikacji danych. Spróbuj ponownie później.');
+        } finally {
+          setIsLoading(false);
         }
     };
 
@@ -153,7 +158,9 @@ const Form = () => {
                     />
                     <a href="/resetPassword" className={classes.forgotPassword}>Zapomniałeś hasła?</a>
                 </div>
-                <button type="submit" className={classes.button}>Zaloguj się</button>
+                <button type="submit" className={classes.button}>
+                  {isLoading ? 'Ładowanie...' : 'Zaloguj się'}
+                </button>
                 <a href="http://localhost:8000/auth/google" className={classes.googleLogin}>
                     <FcGoogle size={25} /> Zaloguj za pomocą Google
                 </a>
