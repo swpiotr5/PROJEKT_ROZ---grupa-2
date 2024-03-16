@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '40px',
+    padding: '20px',
     width: '80%',
     height: '100vh',
   },

@@ -17,7 +17,7 @@ const FormFooter = () => {
     const classes = useStyles();
 return (
     <div className={classes.footer}>
-        <p>Don't have an account? <a href="/register">Register</a></p>
+        <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
         <p className={classes.footerText}>&copy; 2024, GuardianVault. All rights reserved.</p>
     </div>
 )
