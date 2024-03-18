@@ -1,6 +1,8 @@
 # Aplikacja do Zarządzania Domem Dziecka
 
-![Logo aplikacji](./frontend/src/assets/GuardianVaultLogo.png)
+<p align="center">
+  <img src="./images/logo.png" alt="Logo aplikacji" width="200"/>
+</p>
 
 ## Opis Projektu
 
@@ -18,3 +20,7 @@ Projekt został stworzony przy użyciu następujących technologii:
   - Django REST Framework
   - PostgreSQL
 - Docker
+
+## Status
+
+Projekt jest w trakcie realizacji
