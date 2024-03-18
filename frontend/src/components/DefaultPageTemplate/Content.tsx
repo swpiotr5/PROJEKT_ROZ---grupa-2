@@ -14,7 +14,16 @@ const useStyles = createUseStyles({
     buildImg: {
         width: '600px',
         height: 'auto',
-    }
+    },
+    '@media (max-width: 768px)': {
+        wrapper: {
+            textAlign: 'center',
+        },
+        buildImg: {
+            width: '300px',
+        },
+    },
+
 });
 
 
