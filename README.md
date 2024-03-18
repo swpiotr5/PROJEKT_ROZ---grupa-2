@@ -1,7 +1,7 @@
 # Aplikacja do Zarządzania Domem Dziecka
 
 <p align="center">
-  <img src="./images/logo.png" alt="Logo aplikacji" width="200"/>
+  <img src="./frontend/src/assets/GuardianVaultLogo.png" alt="Logo aplikacji" width="200"/>
 </p>
 
 ## Opis Projektu
