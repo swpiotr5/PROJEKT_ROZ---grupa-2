@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import building from '../../assets/building.png'
+import building from '../../assets/WIP.png'
 
 const useStyles = createUseStyles({
     wrapper: {
@@ -14,6 +14,8 @@ const useStyles = createUseStyles({
     buildImg: {
         width: '600px',
         height: 'auto',
+        borderRadius: '10px',
+        maskImage: 'linear-gradient(to bottom, transparent, black 20%, transparent)',
     },
     '@media (max-width: 768px)': {
         wrapper: {
@@ -23,7 +25,6 @@ const useStyles = createUseStyles({
             width: '300px',
         },
     },
-
 });
 
 
