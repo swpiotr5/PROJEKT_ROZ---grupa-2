@@ -1,6 +1,6 @@
 import { createUseStyles } from "react-jss";
 import Navbar from "../components/DefaultPageTemplate/Navbar";
-import MainButtons from "../components/ChildrenPage/ChildrenContent";
+import MainContent from "../components/ChildrenPage/MainContent";
 
 const useStyle = createUseStyles({
     root: {
@@ -31,7 +31,7 @@ const Children = () => {
         <div className={classes.root}>
             <div className={classes.wrapper}>
                 <Navbar/>
-                <MainButtons/>
+                <MainContent/>
             </div>
         </div>
         

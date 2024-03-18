@@ -60,23 +60,26 @@ const useStyles = createUseStyles({
         childrenGrid: {
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         },
+        wrapper: {
+            marginTop: '200px',
+        },
     },
 });
 
-const ChildrenContent = () => {
+const MainButtons = ({ onAddChild }: { onAddChild: () => void }) => {
     const classes = useStyles();
 
     const [children, setChildren] = useState([
         { id: 1, name: 'Jan', surname: 'Nowak', age: 10 },
         { id: 2, name: 'Anna', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Karolina', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Michał', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Joanna', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Ola', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Piotr', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Jakub', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Kasia', surname: 'Nowak', age: 12 },
-        { id: 2, name: 'Mariusz', surname: 'Nowak', age: 12 },
+        { id: 3, name: 'Karolina', surname: 'Nowak', age: 12 },
+        { id: 4, name: 'Michał', surname: 'Nowak', age: 12 },
+        { id: 5, name: 'Joanna', surname: 'Nowak', age: 12 },
+        { id: 6, name: 'Ola', surname: 'Nowak', age: 12 },
+        { id: 7, name: 'Piotr', surname: 'Nowak', age: 12 },
+        { id: 8, name: 'Jakub', surname: 'Nowak', age: 12 },
+        { id: 9, name: 'Kasia', surname: 'Nowak', age: 12 },
+        { id: 10, name: 'Mariusz', surname: 'Nowak', age: 12 },
     ]);
 
     useEffect(() => {
@@ -91,12 +94,12 @@ const ChildrenContent = () => {
 
 
     const handleDeleteChild = () => {
-        
+        //TODO
     };
 
     return (
         <div className={classes.wrapper}>
-            <button className={`${classes.button} ${classes.addButton}`}>Dodaj dziecko</button>
+            <button className={`${classes.button} ${classes.addButton}`} onClick={onAddChild}>Dodaj dziecko</button>
             <h1>Lista dzieci</h1>
             <div className={classes.childrenGrid}>
                 {children.map((child: any) => (
@@ -115,4 +118,4 @@ const ChildrenContent = () => {
     );
 };
 
-export default ChildrenContent;
+export default MainButtons;
