@@ -4,12 +4,18 @@ import GuardianVaultLogo from '../../assets/GuardianVaultLogo.png';
 const useStyles = createUseStyles({
     navbar: {
         backgroundColor: '#B6BBC4',
-        overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         fontWeight: 'bold',
         padding: '0 5rem',
+        WebkitBoxShadow: '1px 20px 30px -5px rgba(182, 187, 196, 1)',
+        MozBoxShadow: '1px 20px 30px -5px rgba(182, 187, 196, 1)',
+        boxShadow: '1px 20px 30px -5px rgba(182, 187, 196, 1)',
+        width: '100%',
+        position: 'fixed',
+        top: 0,
+        height: '100px',
     },
     logo: {
         width: 'clamp(70px, 10vw, 100px)',
@@ -38,6 +44,29 @@ const useStyles = createUseStyles({
             '&:hover': {
                 color: '#F0ECE5',
             },
+        },
+    },
+    '@media (max-width: 768px)': {
+        navbar: {
+            flexDirection: 'column',
+            height: 'auto',
+            padding: '1rem',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        logo: {
+            marginBottom: '1rem',
+        },
+        linksContainer: {
+            marginTop: '1rem',
+        },
+        links: {
+            flexDirection: 'column',
+            gap: '1rem',
+            textAlign: 'center',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0',
         },
     },
 });
