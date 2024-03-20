@@ -112,27 +112,27 @@ const AddChildrenForm = ( { isOpen, onClose }: { isOpen: boolean, onClose: () =>
                 <label className={classes.label}>
                     Nazwisko:
                     <input type="text" {...register('surname', { required: true })} className={`${classes.input} ${errors.surname ? classes.inputError : ''}`} />
-                    {errors.name && <span className={classes.errorText}>To pole jest wymagane</span>}
+                    {errors.surname && <span className={classes.errorText}>To pole jest wymagane</span>}
                 </label>
                 <label className={classes.label}>
                     Data urodzenia:
                     <input type="date" {...register('dateOfBirth', { required: true })} className={`${classes.input} ${errors.dateOfBirth ? classes.inputError : ''}`} />
-                    {errors.name && <span className={classes.errorText}>To pole jest wymagane</span>}
+                    {errors.dateOfBirth && <span className={classes.errorText}>To pole jest wymagane</span>}
                 </label>
                 <label className={classes.label}>
                     Miejsce urodzenia:
                     <input type="text" {...register('placeOfBirth', { required: true })} className={`${classes.input} ${errors.placeOfBirth ? classes.inputError : ''}`} />
-                    {errors.name && <span className={classes.errorText}>To pole jest wymagane</span>}
+                    {errors.placeOfBirth && <span className={classes.errorText}>To pole jest wymagane</span>}
                 </label>
                 <label className={classes.label}>
                     Data przyjęcia:
                     <input type="date" {...register('dateOfAdmission', { required: true })} className={`${classes.input} ${errors.dateOfAdmission ? classes.inputError : ''}`} />
-                    {errors.name && <span className={classes.errorText}>To pole jest wymagane</span>}
+                    {errors.dateOfAdmission && <span className={classes.errorText}>To pole jest wymagane</span>}
                 </label>
                 <label className={classes.label}>
                     Numer skierowania:
                     <input type="text" {...register('referralNumber', { required: true })} className={`${classes.input} ${errors.referralNumber ? classes.inputError : ''}`} />
-                    {errors.name && <span className={classes.errorText}>To pole jest wymagane</span>}
+                    {errors.referralNumber && <span className={classes.errorText}>To pole jest wymagane</span>}
                 </label>
                 <label className={classes.label}>
                     Matka:

@@ -78,8 +78,8 @@ const Navbar = () => {
             <img className={classes.logo} src={GuardianVaultLogo} alt="" />
             <div className={classes.linksContainer}>
                 <ul className={classes.links}>
-                    <li><a href="">Strona główna</a></li>
-                    <li><a href="">Dzieci</a></li>
+                    <li><a href="/">Strona główna</a></li>
+                    <li><a href="/children">Dzieci</a></li>
                     <li><a href="">Dokumenty</a></li>
                     <li><a href="">Kalendarz</a></li>
                     <li><a href="">Ustawienia</a></li>
