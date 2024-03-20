@@ -1,5 +1,4 @@
 import { createUseStyles } from 'react-jss';
-import React, { useState } from 'react';
 import RightWrapper from '../components/Register/RightWrapper';
 import LeftWrapper from '../components/Register/LeftWrapper';
 
@@ -34,7 +33,7 @@ const useStyles = createUseStyles({
   
 const Register = () => {
     const classes = useStyles();
-    
+
     return (
       <div className={classes.root}>
         <div className={classes.wrapper}>
