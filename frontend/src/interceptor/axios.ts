@@ -8,7 +8,7 @@ axios.interceptors.request.use(resp => resp, async error => {
         console.log(localStorage.getItem('refresh_token'))
         try {
             const response = await axios.post(
-                'http://localhost:8001/token/refresh/', 
+                'http://localhost:8000/token/refresh/', 
                 { refresh: localStorage.getItem('refresh_token') }, 
                 { 
                     headers: { 'Content-Type': 'application/json' },

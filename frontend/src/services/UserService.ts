@@ -7,7 +7,7 @@ export const registerUser = async (email: string, password: string) => {
     const hashedPassword = bcrypt.hashSync(password, salt);
 
     try {
-        const response = await axios.post('http://localhost:8001/api/register', { email, password: hashedPassword });
+        const response = await axios.post('http://localhost:8000/api/register', { email, password: hashedPassword });
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -22,7 +22,7 @@ export const registerUser = async (email: string, password: string) => {
 
 export const loginUser = async (email: string, password: string) => {
     try {
-        const response = await axios.post('http://localhost:8001/token/', { username: email, password }, {
+        const response = await axios.post('http://localhost:8000/api/login/', { username: email, password }, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -55,7 +55,7 @@ export const Logout = () => {
     (async () => {
         try {
             const { data } = await axios.post(
-                'http://localhost:8001/logout/',
+                'http://localhost:8000/logout/',
                 {
                     refresh_token: localStorage.getItem('refresh_token'),
                 },
