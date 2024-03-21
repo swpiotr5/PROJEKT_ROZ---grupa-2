@@ -159,3 +159,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '675243173979-0u8rv2onm1l51leac1551k64bvmfe0f4.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
