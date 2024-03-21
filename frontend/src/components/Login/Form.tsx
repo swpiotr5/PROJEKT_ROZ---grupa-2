@@ -164,6 +164,7 @@ const Form = () => {
               <button type="submit" className={classes.button}>
                 {isLoading ? 'Ładowanie...' : 'Zaloguj się'}
               </button>
+              
               <a href="http://localhost:8000/auth/complete/google-oauth2/" className={classes.googleLogin}>
                   <FcGoogle size={25} /> Zaloguj za pomocą Google
               </a>
