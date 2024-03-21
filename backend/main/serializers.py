@@ -10,63 +10,22 @@ class MainSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
+    username = serializers.CharField()
     password = serializers.CharField()
 
     def validate(self, data):
-        email = data.get('email')
+        username = data.get('username')
         password = data.get('password')
 
-        # Uwierzytelnij użytkownika
-        user = authenticate(request=self.context.get('request'), username=email, password=password)
+        if username and password:
+            user = authenticate(request=self.context.get('request'), username=username, password=password)
 
-        if not user:
-            raise serializers.ValidationError("Incorrect Credentials")
-        if not user.is_active:
-            raise serializers.ValidationError("User is inactive")
+            if not user:
+                msg = ('Unable to authenticate with provided credentials')
+                raise serializers.ValidationError(msg, code='authorization')
+        else:
+            msg = ('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code='authorization')
 
-        return user
-
-
-
-    # def validate(self, data):
-    #     email = data.get('email')
-    #     password = data.get('password')
-
-
-    #     if not email or not password:
-    #         raise serializers.ValidationError("Email and password are required")
-
-    #     # np. sprawdzenie czy istnieje użytkownik o podanym adresie email i czy hasło się zgadza
-    
-    #     return data
-
-    # def validate(self, data):
-    #     # Pobierz adres email i hasło z danych wejściowych
-    #     email = data.get('email')
-    #     password = data.get('password')
-
-    #     user = authenticate(request=self.context.get('request'), username=email, password=password)
-
-    #     if not user:
-    #         raise serializers.ValidationError("Incorrect Credentials")
-    #     if not user.is_active:
-    #         raise serializers.ValidationError("User is inactive")
-
-    #     token, _ = Token.objects.get_or_create(user=user)
-
-    #     return token.key
-
-
-    # def validate(self, data):
-    #     email = data.get('email')
-    #     password = data.get('password')
-
-    #     user = authenticate(request=self.context.get('request'), username=email, password=password)
-
-    #     if not user:
-    #         raise serializers.ValidationError("Incorrect Credentials")
-    #     if not user.is_active:
-    #         raise serializers.ValidationError("User is inactive")
-
-    #     return user
+        data['user'] = user
+        return data

@@ -114,7 +114,7 @@ const Form = () => {
           setLoginError(errorMessage);
       }
     } catch (error) {
-      if ((error as Error).message === 'Network Error.') {
+      if ((error as Error).message === 'Network Error.6') {
         setLoginError('Brak połączenia. Spróbuj ponownie później.');
       } else {
         setLoginError('Wystąpił błąd podczas weryfikacji danych. Spróbuj ponownie później.');

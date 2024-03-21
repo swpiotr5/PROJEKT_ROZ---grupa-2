@@ -11,7 +11,7 @@ router.register(r'mains', main_views.MainView, 'main')
 
 urlpatterns = [
     # Dodaj nową ścieżkę do obsługi uwierzytelniania
-    path('login/', main_views.LoginView.as_view(), name='login'),
+    path('api/login/', main_views.LoginView.as_view(), name='login'),
 
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
@@ -22,7 +22,7 @@ urlpatterns = [
     path('token/refresh/', 
           jwt_views.TokenRefreshView.as_view(), 
           name='token_refresh'),
-    path('logout/', main_views.LogoutView.as_view(), name='logout')
+    path('api/logout/', main_views.LogoutView.as_view(), name='logout')
 ]
 
 
