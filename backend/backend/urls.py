@@ -3,6 +3,7 @@ from django.urls import path, include
 from rest_framework import routers
 from main import views
 from rest_framework_simplejwt import views as jwt_views
+from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 router.register(r'mains', views.MainView, 'main')
@@ -22,6 +23,8 @@ urlpatterns = [
     path('token/refresh/', 
           jwt_views.TokenRefreshView.as_view(), 
           name='token_refresh'),
-    path('logout/', views.LogoutView.as_view(), name='logout')
+    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('social-auth/',include('social_django.urls',namespace='social')),
+    path("", views.home,name='home'),
 ]
 
