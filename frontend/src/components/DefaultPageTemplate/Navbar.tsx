@@ -73,7 +73,7 @@ const useStyles = createUseStyles({
             marginBottom: '1rem',
         },
         linksContainer: {
-            marginTop: '1rem',
+            marginTop: '-1rem',
         },
         links: {
             flexDirection: 'column',
