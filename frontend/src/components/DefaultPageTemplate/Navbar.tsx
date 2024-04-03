@@ -1,5 +1,7 @@
 import { createUseStyles } from 'react-jss';
+import { logoutUser } from '../../services/UserService';
 import GuardianVaultLogo from '../../assets/GuardianVaultLogo.png';
+import { Link } from 'react-router-dom';
 
 const useStyles = createUseStyles({
     navbar: {
@@ -46,6 +48,19 @@ const useStyles = createUseStyles({
             },
         },
     },
+    logoutBtn: {
+        backgroundColor: '#31304D',
+        color: '#F0ECE5',
+        padding: '0.5rem 1rem',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+            backgroundColor: '#F0ECE5',
+            color: '#31304D',
+        },
+    },
     '@media (max-width: 768px)': {
         navbar: {
             flexDirection: 'column',
@@ -68,23 +83,32 @@ const useStyles = createUseStyles({
             alignItems: 'center',
             padding: '0',
         },
+        logoutBtn: {
+            marginTop: '1rem',
+        },
     },
 });
 
 const Navbar = () => {
     const classes = useStyles();
+
+    const handleLogout = () => {
+        logoutUser();
+    };
+
     return (
         <nav className={classes.navbar}>
             <img className={classes.logo} src={GuardianVaultLogo} alt="" />
             <div className={classes.linksContainer}>
                 <ul className={classes.links}>
-                    <li><a href="/">Strona główna</a></li>
-                    <li><a href="/children">Dzieci</a></li>
-                    <li><a href="">Dokumenty</a></li>
-                    <li><a href="">Kalendarz</a></li>
-                    <li><a href="">Ustawienia</a></li>
+                <li><Link to="/">Strona główna</Link></li>
+                    <li><Link to="/children">Dzieci</Link></li>
+                    <li><Link to="/documents">Dokumenty</Link></li>
+                    <li><Link to="/calendar">Kalendarz</Link></li> 
+                    <li><Link to="/settings">Ustawienia</Link></li> 
                 </ul>
             </div>
+            <button onClick={handleLogout} className={classes.logoutBtn}>Wyloguj</button>
         </nav>
     );
 };
