@@ -176,3 +176,9 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+ACCOUNT_EMAIL_REQUIRED = False

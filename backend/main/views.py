@@ -1,11 +1,13 @@
 from rest_framework import viewsets, status, views
-from rest_framework.response import Response
 from .models import Main
-from .serializers import MainSerializer, LoginSerializer
+from .serializers import MainSerializer, LoginSerializer, UserSerializer
 from .serializers import LoginSerializer
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
+from rest_framework import status
+from rest_framework.response import Response
+from django.urls import reverse
 
 
 class HomeView(APIView):
@@ -26,10 +28,15 @@ class LoginView(views.APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-        return Response({
+
+        redirect_url = 'http://localhost:3000/home'
+
+        response = Response({
             "user": str(user),
             "token": token.key,
-        })
+        }, status=status.HTTP_200_OK)
+        response['Location'] = redirect_url 
+        return response
 
 
 class LogoutView(APIView):
@@ -42,3 +49,13 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class RegistrationView(views.APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
