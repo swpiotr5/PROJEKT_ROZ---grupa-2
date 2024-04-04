@@ -66,7 +66,7 @@ const useStyles = createUseStyles({
     },
 });
 
-const MainButtons = ({ onAddChild }: { onAddChild: () => void }) => {
+const ChildrenContent = ({ onAddChild }: { onAddChild: () => void }) => {
     const classes = useStyles();
 
     const [children, setChildren] = useState([
@@ -118,4 +118,4 @@ const MainButtons = ({ onAddChild }: { onAddChild: () => void }) => {
     );
 };
 
-export default MainButtons;
+export default ChildrenContent;
