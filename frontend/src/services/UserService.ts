@@ -1,13 +1,15 @@
 import axios, { AxiosError } from 'axios';
 import {useEffect, useState} from "react";
-import bcrypt from 'bcryptjs';
 
 export const registerUser = async (email: string, password: string) => {
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
 
     try {
-        const response = await axios.post('http://localhost:8000/api/register', { email, password: hashedPassword });
+        const response = await axios.post('http://localhost:8000/api/register/', { username: email, password }, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        });
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
