@@ -20,6 +20,7 @@ urlpatterns = [
     path('token/refresh/', 
           jwt_views.TokenRefreshView.as_view(), 
           name='token_refresh'),
-    path('api/logout/', main_views.LogoutView.as_view(), name='logout')
+    path('api/logout/', main_views.LogoutView.as_view(), name='logout'),
+    path('add_children/', main_views.add_children_view, name='add_children'),
 ]
 

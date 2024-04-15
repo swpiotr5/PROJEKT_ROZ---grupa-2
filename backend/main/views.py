@@ -7,7 +7,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework.response import Response
-from django.urls import reverse
+from .models import Children
+
+
+from django.http import HttpResponse
+from .utils import add_children
+
+def add_children_view(request):
+    add_children()
+    return HttpResponse("Przykładowe dane zostały dodane do bazy.")
 
 
 class HomeView(APIView):
@@ -31,9 +39,14 @@ class LoginView(views.APIView):
 
         redirect_url = 'http://localhost:3000/home'
 
+        children = Children.objects.all().values()
+        print("children:", children)
+        children_json = list(children)
+
         response = Response({
             "user": str(user),
             "token": token.key,
+            "children": children_json
         }, status=status.HTTP_200_OK)
         response['Location'] = redirect_url 
         return response
