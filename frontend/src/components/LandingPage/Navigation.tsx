@@ -38,6 +38,11 @@ const useStyles = createUseStyles({
         transitionDuration: '0.4s',
         '&:hover': {
             backgroundColor: '#F0ECE5',
+        },
+        '@media (max-width: 768px)': {
+            padding: '10px 20px',
+            fontSize: '14px',
+            marginRight: '10px',
         }
     },
 });

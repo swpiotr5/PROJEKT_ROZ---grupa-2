@@ -31,14 +31,18 @@ const useStyles = createUseStyles({
   },
 });
 
-const Login = () => {
+interface LoginProps {
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login: React.FC<LoginProps> = ({ setIsAuth }) =>  {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
         <LeftWrapper />
-        <RightWrapper />
+        <RightWrapper setIsAuth={setIsAuth}/>
       </div>
     </div>
   );

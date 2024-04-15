@@ -47,7 +47,21 @@ const useStyles = createUseStyles({
         wrapper: {
             flexDirection: 'column',
             gap: '2rem',
+            justifyContent: 'flex-start',
+            marginRight: '0px',
         },
+        header: {
+            fontSize: '1.5em',
+            marginTop: '5rem',
+            textAlign: 'center',
+        },
+        subheader: {
+            fontSize: '1em',
+            textAlign: 'center',
+        },
+        btnWrapper: {
+            marginTop: '1rem',
+        }
     },
 });
 

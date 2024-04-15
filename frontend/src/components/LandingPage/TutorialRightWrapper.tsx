@@ -20,6 +20,7 @@ const useStyles = createUseStyles({
         wrapper: {
             flexDirection: 'column',
             gap: '2rem',
+            display: 'none',
         },
     },
 });

@@ -31,13 +31,17 @@ const useStyles = createUseStyles({
       },
 });
 
-const RightWrapper = () => {
+interface RightWrapperProps {
+    setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const RightWrapper: React.FC<RightWrapperProps> = ({ setIsAuth }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.right}>
       <FormHeader />
-      <Form />
+        <Form setIsAuth={setIsAuth} />
       <FormFooter />
     </div>
   );
