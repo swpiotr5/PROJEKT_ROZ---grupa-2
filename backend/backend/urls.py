@@ -22,5 +22,6 @@ urlpatterns = [
           name='token_refresh'),
     path('api/logout/', main_views.LogoutView.as_view(), name='logout'),
     path('add_children/', main_views.add_children_view, name='add_children'),
+    path('api/children/', main_views.get_children_view, name='get_children'),
 ]
 

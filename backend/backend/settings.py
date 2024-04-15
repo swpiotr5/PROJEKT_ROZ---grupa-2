@@ -97,10 +97,6 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'public'),
-]
-
 # STATIC_URL jest używany do budowania adresów URL dla plików statycznych w aplikacji Django. Ustawiając go na /static/, mówisz Django, żeby serwował pliki statyczne z katalogu statycznego pod adresem URL rozpoczynającym się od /static/.
 
 WSGI_APPLICATION = 'backend.wsgi.application'
