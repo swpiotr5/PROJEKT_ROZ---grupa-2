@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Main
+from .models import Main, Children
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -57,3 +57,8 @@ class UserSerializer(serializers.ModelSerializer):
         if User.objects.filter(username=username).exists():
             raise serializers.ValidationError("User with this credentials already exists.")
         return data
+
+class ChildrenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Children
+        fields = '__all__'

@@ -1,13 +1,24 @@
 from rest_framework import viewsets, status, views
-from .models import Main
-from .serializers import MainSerializer, LoginSerializer, UserSerializer
-from .serializers import LoginSerializer
+from .models import Main, Children
+from .serializers import MainSerializer, LoginSerializer, UserSerializer, ChildrenSerializer
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework.response import Response
-from django.urls import reverse
+from django.http import HttpResponse
+from .utils import add_children
+from rest_framework.decorators import api_view
+
+def add_children_view():
+    add_children()
+    return HttpResponse("Przykładowe dane zostały dodane do bazy.")
+
+@api_view(['GET'])
+def get_children_view(request):
+    children = Children.objects.all()
+    serializer = ChildrenSerializer(children, many=True)
+    return Response(serializer.data)
 
 
 class HomeView(APIView):
@@ -58,4 +69,5 @@ class RegistrationView(views.APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
