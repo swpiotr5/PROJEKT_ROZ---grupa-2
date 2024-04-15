@@ -8,7 +8,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend/:/app
-      - ./frontend/public:/app/frontend/public  # Dodaj mapowanie dla katalogu frontend/public
     depends_on:
       - db
   react:
